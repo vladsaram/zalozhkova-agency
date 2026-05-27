@@ -408,6 +408,25 @@ nav {
 .cta-section p { font-size: 1.125rem; color: var(--muted); max-width: 50ch; margin: 0 auto 2.5rem; }
 .cta-section .btn { font-size: 1rem; padding: 1rem 2.5rem; }
 
+/* ─── SOCIAL ICONS ───────────────────────── */
+.footer-socials {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+.footer-socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: var(--dark3);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  transition: color 0.2s, border-color 0.2s;
+}
+.footer-socials a:hover { color: var(--accent); border-color: var(--accent); }
+
 /* ─── FOOTER ─────────────────────────────── */
 footer {
   background: var(--dark2);
@@ -427,6 +446,16 @@ footer {
 .footer-contacts { text-align: right; }
 .footer-contacts a { display: block; font-size: 0.875rem; color: var(--muted); text-decoration: none; margin-top: 0.25rem; }
 .footer-contacts a:hover { color: var(--text); }
+.footer-nav {
+  display: flex;
+  gap: 3rem;
+}
+.footer-nav__col { display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-nav__title { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.25rem; }
+.footer-nav__col a { font-size: 0.875rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-nav__col a:hover { color: var(--text); }
+@media (max-width: 560px) { .footer-nav { gap: 2rem; } }
+
 .footer-copy {
   margin-top: 2.5rem;
   padding-top: 1.5rem;
