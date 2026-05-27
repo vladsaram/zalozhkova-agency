@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Залоджкова Agency</title>
+  <title>Zalozhkova Agency</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -14,60 +14,176 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
     }
 
-    header {
-      text-align: center;
-      padding: 4rem 2rem 2rem;
+    /* HERO */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 540px;
+      overflow: hidden;
     }
 
-    header h1 {
-      font-size: clamp(2rem, 6vw, 4.5rem);
+    .hero__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.15) 0%,
+        rgba(0,0,0,0.55) 60%,
+        rgba(0,0,0,0.85) 100%
+      );
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 4rem clamp(1.5rem, 6vw, 6rem);
+    }
+
+    .hero__label {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 1rem;
+    }
+
+    .hero__title {
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
       font-weight: 700;
       letter-spacing: -0.03em;
-      line-height: 1.1;
+      line-height: 1.0;
+      max-width: 14ch;
     }
 
-    header p {
-      margin-top: 1rem;
-      font-size: 1.125rem;
-      color: #888;
+    .hero__sub {
+      margin-top: 1.25rem;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: rgba(255,255,255,0.65);
+      max-width: 40ch;
+      line-height: 1.5;
     }
 
-    .cta {
+    .hero__actions {
       margin-top: 2.5rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
       display: inline-block;
       padding: 0.875rem 2rem;
-      background: #f0f0f0;
-      color: #0a0a0a;
+      font-size: 0.9375rem;
       font-weight: 600;
       border-radius: 6px;
       text-decoration: none;
-      transition: opacity 0.2s;
+      transition: opacity 0.2s, background 0.2s;
     }
 
-    .cta:hover { opacity: 0.85; }
+    .btn--primary {
+      background: #f0f0f0;
+      color: #0a0a0a;
+    }
 
-    footer {
-      margin-top: auto;
-      padding: 2rem;
-      text-align: center;
+    .btn--ghost {
+      border: 1px solid rgba(255,255,255,0.35);
+      color: #f0f0f0;
+    }
+
+    .btn:hover { opacity: 0.8; }
+
+    /* NAV */
+    nav {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem clamp(1.5rem, 6vw, 6rem);
+    }
+
+    .nav__logo {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .nav__links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav__links a {
       font-size: 0.875rem;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav__links a:hover { color: #fff; }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem clamp(1.5rem, 6vw, 6rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8125rem;
       color: #444;
+      border-top: 1px solid #1a1a1a;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Zalozhkova Agency</h1>
-    <p>Стратегия. Дизайн. Результат.</p>
-    <a href="mailto:hello@zalozhkova.agency" class="cta">Связаться</a>
-  </header>
+
+  <section class="hero">
+    <img class="hero__img" src="comnata.webp" alt="Интерьер с видом на Москва-Сити">
+    <div class="hero__overlay"></div>
+
+    <nav>
+      <a class="nav__logo" href="#">ZA</a>
+      <ul class="nav__links">
+        <li><a href="#about">О нас</a></li>
+        <li><a href="#services">Услуги</a></li>
+        <li><a href="mailto:hello@zalozhkova.agency">Контакты</a></li>
+      </ul>
+    </nav>
+
+    <div class="hero__content">
+      <span class="hero__label">Агентство недвижимости</span>
+      <h1 class="hero__title">Zalozhkova Agency</h1>
+      <p class="hero__sub">Находим пространства, которые работают на вас. Москва и регионы.</p>
+      <div class="hero__actions">
+        <a href="mailto:hello@zalozhkova.agency" class="btn btn--primary">Связаться</a>
+        <a href="#services" class="btn btn--ghost">Наши услуги</a>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    &copy; 2026 Zalozhkova Agency
+    <span>&copy; 2026 Zalozhkova Agency</span>
+    <span>hello@zalozhkova.agency</span>
   </footer>
+
 </body>
 </html>
