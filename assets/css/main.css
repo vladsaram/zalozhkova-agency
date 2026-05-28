@@ -427,6 +427,41 @@ nav {
 }
 .footer-socials a:hover { color: var(--accent); border-color: var(--accent); }
 
+/* ─── SCROLL ANIMATIONS ──────────────────────────────────────────────────── */
+
+/* Hero image: initial scale set via JS, CSS ensures smooth transition is OFF
+   (we update per-frame via JS — no CSS transition on hero__img) */
+.hero__img {
+  transition: none;
+}
+
+/* Reveal base state — added by JS before observer fires */
+.will-reveal {
+  opacity: 0;
+  transform: translateY(20px) scale(0.94);
+  transition:
+    opacity  0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+/* About photo gets a bigger grow effect */
+.about-photo.will-reveal {
+  transform: translateY(0) scale(0.82);
+  transition:
+    opacity  0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Triggered state */
+.will-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* stat-cell: override default bg opacity on reveal */
+.stat-cell.will-reveal { background: var(--dark3); }
+
 /* ─── FOOTER ─────────────────────────────── */
 footer {
   background: var(--dark2);
