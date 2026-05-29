@@ -1,24 +1,18 @@
 /* ─── NAV SCROLL BORDER ───────────────────────────────────────────────────── */
 const nav = document.querySelector('nav');
 
-/* ─── HERO ZOOM-OUT ───────────────────────────────────────────────────────── */
-const heroImg = document.querySelector('.hero__img');
-const hero    = document.querySelector('.hero');
-
-if (heroImg) {
-  heroImg.style.transformOrigin = 'center center';
-  heroImg.style.willChange = 'transform';
-  heroImg.style.transform = 'scale(1.12)';
-}
+/* ─── HERO VIDEO PARALLAX ─────────────────────────────────────────────────── */
+const hero = document.querySelector('.hero');
 
 function onScroll() {
   /* nav border */
   nav.style.borderBottomColor = window.scrollY > 10 ? '#333' : 'var(--border)';
 
-  /* hero zoom — scale 1.12 → 1.0 over the hero height */
-  if (heroImg && hero) {
+  /* subtle parallax: video shifts up as you scroll */
+  const heroVid = document.querySelector('.hero__img');
+  if (heroVid && hero) {
     const progress = Math.max(0, Math.min(window.scrollY / hero.offsetHeight, 1));
-    heroImg.style.transform = `scale(${1.12 - 0.12 * progress})`;
+    heroVid.style.transform = `translateY(${progress * 8}%)`;
   }
 }
 
