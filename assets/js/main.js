@@ -1,21 +1,53 @@
 /* ─── NAV SCROLL BORDER ───────────────────────────────────────────────────── */
 const nav = document.querySelector('nav');
 
-/* ─── SCROLL STORY — video scrubbing ─────────────────────────────────────── */
+/* ─── SCROLL STORY — video scrubbing + text reveal ───────────────────────── */
 const storyWrapper = document.querySelector('.story-wrapper');
 const storyVideo   = document.querySelector('.story__video');
+const storyLeft    = document.querySelector('.story__side--left');
+const storyRight   = document.querySelector('.story__side--right');
+
+/* linear interpolation helper */
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+/* map progress range [in, out] → 0..1, clamped */
+function range(progress, inPoint, outPoint) {
+  return Math.max(0, Math.min((progress - inPoint) / (outPoint - inPoint), 1));
+}
 
 function onScroll() {
   /* nav border */
   nav.style.borderBottomColor = window.scrollY > 10 ? '#333' : 'var(--border)';
 
-  /* scrub story video with scroll */
-  if (storyWrapper && storyVideo && storyVideo.duration) {
-    const rect       = storyWrapper.getBoundingClientRect();
-    const scrollable = storyWrapper.offsetHeight - window.innerHeight;
-    const scrolled   = -rect.top;
-    const progress   = Math.max(0, Math.min(scrolled / scrollable, 1));
-    storyVideo.currentTime = progress * storyVideo.duration;
+  if (!storyWrapper || !storyVideo) return;
+
+  const rect       = storyWrapper.getBoundingClientRect();
+  const scrollable = storyWrapper.offsetHeight - window.innerHeight;
+  const scrolled   = -rect.top;
+  const p          = Math.max(0, Math.min(scrolled / scrollable, 1)); // 0→1
+
+  /* 1. Scrub video */
+  if (storyVideo.duration) {
+    storyVideo.currentTime = p * storyVideo.duration;
+  }
+
+  /* 2. Text: fade in 0→0.12, hold, fade out 0.88→1.0
+        translateY: +24px→0 on enter, 0→-24px on exit */
+  const fadeIn  = range(p, 0.02, 0.14);          // 0→1 на входе
+  const fadeOut = 1 - range(p, 0.86, 0.98);      // 1→0 на выходе
+  const opacity = fadeIn * fadeOut;
+
+  const yEnter  = lerp(24, 0, range(p, 0.02, 0.18));   // едет вверх при входе
+  const yExit   = lerp(0, -20, range(p, 0.84, 0.98));  // уходит вверх при выходе
+  const yOffset = yEnter + yExit;
+
+  if (storyLeft) {
+    storyLeft.style.opacity   = opacity;
+    storyLeft.style.transform = `translateY(calc(-50% + ${yOffset}px))`;
+  }
+  if (storyRight) {
+    storyRight.style.opacity   = opacity;
+    storyRight.style.transform = `translateY(calc(-50% + ${yOffset}px))`;
   }
 }
 

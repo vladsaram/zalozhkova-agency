@@ -428,8 +428,9 @@ nav {
 .footer-socials a:hover { color: var(--accent); border-color: var(--accent); }
 
 /* ─── SCROLL STORY ───────────────────────────────────────────────────────── */
+/* ─── SCROLL STORY ───────────────────────────────────────────────────────── */
 .story-wrapper {
-  height: 380vh;            /* scroll distance = video travel */
+  height: 500vh;
   position: relative;
 }
 
@@ -439,12 +440,23 @@ nav {
   height: 100vh;
   overflow: hidden;
   background: #F9FAF3;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
 }
 
-/* Градиентные маски — скрывают края видео */
+/* Видео на всю высоту секции, центрировано */
+.story__video {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  width: auto;
+  min-width: 100%;
+  mix-blend-mode: multiply;
+  border: none; outline: none;
+  pointer-events: none;
+}
+
+/* Градиенты сверху и снизу — скрывают края видео */
 .story::before,
 .story::after {
   content: '';
@@ -455,50 +467,45 @@ nav {
 }
 .story::before {
   top: 0;
-  height: 35%;
-  background: linear-gradient(to bottom, #F9FAF3 0%, transparent 100%);
+  height: 40%;
+  background: linear-gradient(to bottom, #F9FAF3 0%, #F9FAF3 15%, transparent 100%);
 }
 .story::after {
   bottom: 0;
-  height: 8%;
+  height: 15%;
   background: linear-gradient(to top, #F9FAF3 0%, transparent 100%);
 }
 
-/* Видео по центру, растёт снизу */
-.story__video {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 58%;
-  max-width: 820px;
-  display: block;
-  mix-blend-mode: multiply;       /* белый фон видео → прозрачный */
-  clip-path: inset(28% 0 0 0);   /* убираем пустое небо над зданием */
-  border: none;
-  outline: none;
-}
-
-/* Боковые тексты */
+/* Боковые тексты — opacity/transform управляются JS */
 .story__side {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  max-width: 240px;
+  top: 38%;                 /* выше центра — в светлой зоне над зданием */
+  z-index: 3;
+  max-width: 220px;
+  opacity: 0;
+  will-change: opacity, transform;
 }
-.story__side--left  { left: clamp(2rem, 8vw, 8rem); text-align: left; }
-.story__side--right { right: clamp(2rem, 8vw, 8rem); text-align: right; }
+.story__side--left {
+  left: clamp(1.25rem, 5vw, 5rem);
+  transform: translateY(calc(-50% + 24px));
+  text-align: left;
+}
+.story__side--right {
+  right: clamp(1.25rem, 5vw, 5rem);
+  transform: translateY(calc(-50% + 24px));
+  text-align: right;
+}
 
 .story__pre {
-  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-size: clamp(0.95rem, 1.8vw, 1.25rem);
   color: #1a1a1a;
   font-weight: 400;
   line-height: 1.2;
-  margin-bottom: 0.1em;
+  margin-bottom: 0.15em;
 }
 
 .story__title {
-  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  font-size: clamp(1.6rem, 3.8vw, 2.8rem);
   font-weight: 700;
   color: var(--accent);
   letter-spacing: -0.03em;
@@ -507,14 +514,25 @@ nav {
 }
 
 .story__sub {
-  font-size: clamp(0.8rem, 1.5vw, 0.95rem);
-  color: #888;
-  letter-spacing: 0.05em;
+  font-size: clamp(0.7rem, 1.1vw, 0.82rem);
+  color: #777;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* reduced-motion: убираем анимацию, показываем статично */
+@media (prefers-reduced-motion: reduce) {
+  .story__side { opacity: 1 !important; transform: translateY(-50%) !important; }
 }
 
 @media (max-width: 640px) {
-  .story__video { width: 70%; }
-  .story__side { max-width: 120px; }
+  .story__video { height: auto; width: 100%; min-width: unset; top: auto; bottom: 0; }
+  .story__side { max-width: 110px; }
+  .story__side--left  { left: 0.75rem; }
+  .story__side--right { right: 0.75rem; }
+  .story__pre   { font-size: 0.8rem; }
+  .story__title { font-size: 1.2rem; }
+  .story__sub   { font-size: 0.65rem; }
   .story__side--left  { left: 1rem; }
   .story__side--right { right: 1rem; }
   .story__pre  { font-size: 0.85rem; }
