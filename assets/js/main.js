@@ -1,18 +1,21 @@
 /* ─── NAV SCROLL BORDER ───────────────────────────────────────────────────── */
 const nav = document.querySelector('nav');
 
-/* ─── HERO VIDEO PARALLAX ─────────────────────────────────────────────────── */
-const hero = document.querySelector('.hero');
+/* ─── SCROLL STORY — video scrubbing ─────────────────────────────────────── */
+const storyWrapper = document.querySelector('.story-wrapper');
+const storyVideo   = document.querySelector('.story__video');
 
 function onScroll() {
   /* nav border */
   nav.style.borderBottomColor = window.scrollY > 10 ? '#333' : 'var(--border)';
 
-  /* subtle parallax: video shifts up as you scroll */
-  const heroVid = document.querySelector('.hero__img');
-  if (heroVid && hero) {
-    const progress = Math.max(0, Math.min(window.scrollY / hero.offsetHeight, 1));
-    heroVid.style.transform = `translateY(${progress * 8}%)`;
+  /* scrub story video with scroll */
+  if (storyWrapper && storyVideo && storyVideo.duration) {
+    const rect       = storyWrapper.getBoundingClientRect();
+    const scrollable = storyWrapper.offsetHeight - window.innerHeight;
+    const scrolled   = -rect.top;
+    const progress   = Math.max(0, Math.min(scrolled / scrollable, 1));
+    storyVideo.currentTime = progress * storyVideo.duration;
   }
 }
 
