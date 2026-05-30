@@ -1,9 +1,9 @@
 /* ─── NAV SCROLL BORDER ───────────────────────────────────────────────────── */
 const nav = document.querySelector('nav');
 
-/* ─── SCROLL STORY — video scrubbing + text reveal ───────────────────────── */
+/* ─── SCROLL STORY — canvas frame-sequence + text reveal ─────────────────── */
 const storyWrapper = document.querySelector('.story-wrapper');
-const storyVideo   = document.querySelector('.story__video');
+const storyCanvas  = document.querySelector('.story__canvas');
 const storyLeft    = document.querySelector('.story__side--left');
 const storyRight   = document.querySelector('.story__side--right');
 
@@ -20,26 +20,49 @@ window.addEventListener('scroll', () => {
   nav.style.borderBottomColor = window.scrollY > 10 ? '#333' : 'var(--border)';
 }, { passive: true });
 
-/* Story — rAF loop со сглаживанием, чтобы убрать дёрганье при seek */
-if (storyWrapper && storyVideo) {
-  let targetTime  = 0;   // куда хотим (по скроллу)
-  let currentDraw = 0;   // где видео сейчас (плавно догоняет)
+/* Story — кадры-картинки рисуются в canvas по прогрессу скролла.
+   Надёжнее video.currentTime: работает на iOS, без дёрганья при seek. */
+if (storyWrapper && storyCanvas) {
+  const FRAME_COUNT  = 152;
+  const ctx          = storyCanvas.getContext('2d');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const frames       = new Array(FRAME_COUNT);
+  let firstReady     = false;
 
+  const framePath = i =>
+    `assets/images/story-frames/frame_${String(i + 1).padStart(3, '0')}.webp`;
+
+  /* предзагрузка всех кадров */
+  for (let i = 0; i < FRAME_COUNT; i++) {
+    const img = new Image();
+    img.decoding = 'async';
+    img.src = framePath(i);
+    if (i === 0) {
+      img.onload = () => { firstReady = true; drawFrame(0); };
+    }
+    frames[i] = img;
+  }
+
+  let lastDrawn = -1;
+  function drawFrame(idx) {
+    const img = frames[idx];
+    if (!img || !img.complete || !img.naturalWidth) return;
+    ctx.clearRect(0, 0, storyCanvas.width, storyCanvas.height);
+    ctx.drawImage(img, 0, 0, storyCanvas.width, storyCanvas.height);
+    lastDrawn = idx;
+  }
+
+  let currentIdx = 0;
   function tick() {
     const rect       = storyWrapper.getBoundingClientRect();
     const scrollable = storyWrapper.offsetHeight - window.innerHeight;
     const p          = Math.max(0, Math.min(-rect.top / scrollable, 1)); // 0→1
 
-    /* 1. Видео: плавная интерполяция currentTime (lerp 0.12) */
-    if (storyVideo.duration) {
-      targetTime  = p * storyVideo.duration;
-      currentDraw = lerp(currentDraw, targetTime, 0.12);
-      /* применяем только если разница заметна (избегаем лишних seek) */
-      if (Math.abs(currentDraw - storyVideo.currentTime) > 0.012) {
-        storyVideo.currentTime = currentDraw;
-      }
-    }
+    /* 1. Кадр: целевой индекс по скроллу, со сглаживанием (lerp 0.18) */
+    const targetIdx = p * (FRAME_COUNT - 1);
+    currentIdx = reduceMotion ? targetIdx : lerp(currentIdx, targetIdx, 0.18);
+    const drawIdx = Math.round(currentIdx);
+    if (drawIdx !== lastDrawn) drawFrame(drawIdx);
 
     /* 2. Тексты: fade + slide, синхронно слева и справа */
     if (!reduceMotion) {
@@ -59,14 +82,12 @@ if (storyWrapper && storyVideo) {
     requestAnimationFrame(tick);
   }
 
-  /* стартуем после загрузки метаданных видео */
-  if (storyVideo.readyState >= 1) requestAnimationFrame(tick);
-  else storyVideo.addEventListener('loadedmetadata', () => requestAnimationFrame(tick));
+  requestAnimationFrame(tick);
 }
 
 /* ─── SCROLL REVEAL + GROW ────────────────────────────────────────────────── */
 const revealEls = document.querySelectorAll(
-  '.about-photo, .stat-cell, .pain-item, .process-step, .review-card'
+  '.about-photo-frame, .stat-cell, .pain-item, .process-item, .review'
 );
 
 revealEls.forEach(el => el.classList.add('will-reveal'));
