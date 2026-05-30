@@ -289,6 +289,10 @@ body > nav {
   mix-blend-mode: multiply;
   border: none; outline: none;
   pointer-events: none;
+  /* растушёвка левого/правого края — прячет рамку от multiply-блендинга,
+     края канваса бесшовно сливаются с фоном секции #F9FAF3 */
+  -webkit-mask: linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%);
+          mask: linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%);
 }
 
 /* Градиенты сверху и снизу — скрывают края видео */

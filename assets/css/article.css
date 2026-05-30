@@ -231,3 +231,30 @@
 .article__related { margin-top: 3rem; }
 .article__related .label { margin-bottom: 1.25rem; display: block; }
 .posts-grid--sm { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+
+/* ─── FAQ ────────────────────────────────── */
+.article__faq { margin-top: 3rem; }
+.article__faq > h2 { margin-bottom: 1.25rem; }
+.article__faq-item {
+  border-top: 1px solid var(--border);
+  padding: 1.25rem 0;
+}
+.article__faq-item:last-child { border-bottom: 1px solid var(--border); }
+.article__faq-item h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 0.6rem;
+  color: var(--text);
+  line-height: 1.35;
+}
+.article__faq-item h3::before {
+  content: "—";
+  color: var(--accent);
+  margin-right: 0.5rem;
+}
+.article__faq-item p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(240,240,240,0.82);
+  margin: 0;
+}
