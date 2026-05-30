@@ -15,43 +15,54 @@ function range(progress, inPoint, outPoint) {
   return Math.max(0, Math.min((progress - inPoint) / (outPoint - inPoint), 1));
 }
 
-function onScroll() {
-  /* nav border */
+/* nav border — простой scroll listener */
+window.addEventListener('scroll', () => {
   nav.style.borderBottomColor = window.scrollY > 10 ? '#333' : 'var(--border)';
+}, { passive: true });
 
-  if (!storyWrapper || !storyVideo) return;
+/* Story — rAF loop со сглаживанием, чтобы убрать дёрганье при seek */
+if (storyWrapper && storyVideo) {
+  let targetTime  = 0;   // куда хотим (по скроллу)
+  let currentDraw = 0;   // где видео сейчас (плавно догоняет)
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const rect       = storyWrapper.getBoundingClientRect();
-  const scrollable = storyWrapper.offsetHeight - window.innerHeight;
-  const scrolled   = -rect.top;
-  const p          = Math.max(0, Math.min(scrolled / scrollable, 1)); // 0→1
+  function tick() {
+    const rect       = storyWrapper.getBoundingClientRect();
+    const scrollable = storyWrapper.offsetHeight - window.innerHeight;
+    const p          = Math.max(0, Math.min(-rect.top / scrollable, 1)); // 0→1
 
-  /* 1. Scrub video */
-  if (storyVideo.duration) {
-    storyVideo.currentTime = p * storyVideo.duration;
+    /* 1. Видео: плавная интерполяция currentTime (lerp 0.12) */
+    if (storyVideo.duration) {
+      targetTime  = p * storyVideo.duration;
+      currentDraw = lerp(currentDraw, targetTime, 0.12);
+      /* применяем только если разница заметна (избегаем лишних seek) */
+      if (Math.abs(currentDraw - storyVideo.currentTime) > 0.012) {
+        storyVideo.currentTime = currentDraw;
+      }
+    }
+
+    /* 2. Тексты: fade + slide, синхронно слева и справа */
+    if (!reduceMotion) {
+      const fadeIn  = range(p, 0.04, 0.16);
+      const fadeOut = 1 - range(p, 0.84, 0.96);
+      const opacity = fadeIn * fadeOut;
+
+      const yEnter  = lerp(28, 0, range(p, 0.04, 0.20));
+      const yExit   = lerp(0, -22, range(p, 0.82, 0.96));
+      const y       = yEnter + yExit;
+      const t       = `translateY(calc(-50% + ${y}px))`;
+
+      if (storyLeft)  { storyLeft.style.opacity  = opacity; storyLeft.style.transform  = t; }
+      if (storyRight) { storyRight.style.opacity = opacity; storyRight.style.transform = t; }
+    }
+
+    requestAnimationFrame(tick);
   }
 
-  /* 2. Text: fade in 0→0.12, hold, fade out 0.88→1.0
-        translateY: +24px→0 on enter, 0→-24px on exit */
-  const fadeIn  = range(p, 0.02, 0.14);          // 0→1 на входе
-  const fadeOut = 1 - range(p, 0.86, 0.98);      // 1→0 на выходе
-  const opacity = fadeIn * fadeOut;
-
-  const yEnter  = lerp(24, 0, range(p, 0.02, 0.18));   // едет вверх при входе
-  const yExit   = lerp(0, -20, range(p, 0.84, 0.98));  // уходит вверх при выходе
-  const yOffset = yEnter + yExit;
-
-  if (storyLeft) {
-    storyLeft.style.opacity   = opacity;
-    storyLeft.style.transform = `translateY(calc(-50% + ${yOffset}px))`;
-  }
-  if (storyRight) {
-    storyRight.style.opacity   = opacity;
-    storyRight.style.transform = `translateY(calc(-50% + ${yOffset}px))`;
-  }
+  /* стартуем после загрузки метаданных видео */
+  if (storyVideo.readyState >= 1) requestAnimationFrame(tick);
+  else storyVideo.addEventListener('loadedmetadata', () => requestAnimationFrame(tick));
 }
-
-window.addEventListener('scroll', onScroll, { passive: true });
 
 /* ─── SCROLL REVEAL + GROW ────────────────────────────────────────────────── */
 const revealEls = document.querySelectorAll(
