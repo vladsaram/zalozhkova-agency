@@ -64,200 +64,251 @@
 
   <section class="section" style="padding-top:0">
     <div class="container">
-      <div class="pricing-grid">
-        <a href="capital-towers/" class="price-card" style="text-decoration:none;display:block">
+      <div class="catalog-filters" id="jk-filters">
+        <div class="filter-group" data-filter="cls">
+          <span class="filter-group__label">Класс</span>
+          <button class="filter-btn is-active" data-val="">Все</button>
+          <button class="filter-btn" data-val="Элит">Элит</button>
+          <button class="filter-btn" data-val="Premium">Premium</button>
+          <button class="filter-btn" data-val="Бизнес">Бизнес</button>
+          <button class="filter-btn" data-val="Комфорт+">Комфорт+</button>
+        </div>
+        <div class="filter-group" data-filter="price">
+          <span class="filter-group__label">Цена</span>
+          <button class="filter-btn is-active" data-val="">Любая</button>
+          <button class="filter-btn" data-val="0-15">до 15 млн</button>
+          <button class="filter-btn" data-val="15-50">15–50 млн</button>
+          <button class="filter-btn" data-val="50-100">50–100 млн</button>
+          <button class="filter-btn" data-val="100-99999">от 100 млн</button>
+        </div>
+        <div class="filter-group" data-filter="status">
+          <span class="filter-group__label">Статус</span>
+          <button class="filter-btn is-active" data-val="">Любой</button>
+          <button class="filter-btn" data-val="Строится">Строится</button>
+          <button class="filter-btn" data-val="Сдан">Сдан</button>
+        </div>
+        <div class="filter-group" data-filter="district">
+          <span class="filter-group__label">Район</span>
+          <select class="filter-select" id="jk-district">
+            <option value="">Все районы</option>
+          <option value="Арбат">Арбат</option>
+          <option value="Басманный">Басманный</option>
+          <option value="Войковский">Войковский</option>
+          <option value="Даниловский">Даниловский</option>
+          <option value="Дорогомилово">Дорогомилово</option>
+          <option value="Замоскворечье">Замоскворечье</option>
+          <option value="Красносельский">Красносельский</option>
+          <option value="Лефортово">Лефортово</option>
+          <option value="Марьина Роща">Марьина Роща</option>
+          <option value="Мещанский">Мещанский</option>
+          <option value="Мневниковская пойма">Мневниковская пойма</option>
+          <option value="Москва-Сити">Москва-Сити</option>
+          <option value="Нагатино-Садовники">Нагатино-Садовники</option>
+          <option value="Нагатинский затон">Нагатинский затон</option>
+          <option value="Новомосковский АО">Новомосковский АО</option>
+          <option value="Покровское-Стрешнево">Покровское-Стрешнево</option>
+          <option value="Пресненский">Пресненский</option>
+          <option value="Раменки">Раменки</option>
+          <option value="Хамовники">Хамовники</option>
+          <option value="Хорошёво-Мнёвники">Хорошёво-Мнёвники</option>
+          </select>
+        </div>
+      </div>
+      <p class="catalog-count" id="jk-count"></p>
+      <div class="pricing-grid" id="jk-grid">
+        <a href="capital-towers/" class="price-card" style="text-decoration:none;display:block" data-cls="Premium" data-price="60" data-district="Москва-Сити" data-status="Сдан">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Premium+ · Москва-Сити</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Capital Towers <span style="font-size:.7rem;background:rgba(201,169,110,.15);color:var(--accent);padding:.2rem .5rem;border-radius:4px;margin-left:.5rem">Обзор</span></h2>
           <div class="price-card__price" style="font-size:1.5rem">от 60 млн</div>
           <p class="price-card__note">Сдан</p>
         </a>
-        <a href="neva-towers/" class="price-card" style="text-decoration:none;display:block">
+        <a href="neva-towers/" class="price-card" style="text-decoration:none;display:block" data-cls="Бизнес" data-price="30" data-district="Москва-Сити" data-status="Сдан">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Бизнес / Premium · Москва-Сити</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Neva Towers <span style="font-size:.7rem;background:rgba(201,169,110,.15);color:var(--accent);padding:.2rem .5rem;border-radius:4px;margin-left:.5rem">Обзор</span></h2>
           <div class="price-card__price" style="font-size:1.5rem">от 30 млн</div>
           <p class="price-card__note">Сдан</p>
         </a>
-        <a href="luzhniki-collection/" class="price-card" style="text-decoration:none;display:block">
+        <a href="luzhniki-collection/" class="price-card" style="text-decoration:none;display:block" data-cls="Элит" data-price="100" data-district="Хамовники" data-status="Сдан">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Элит · Хамовники</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Luzhniki Collection <span style="font-size:.7rem;background:rgba(201,169,110,.15);color:var(--accent);padding:.2rem .5rem;border-radius:4px;margin-left:.5rem">Обзор</span></h2>
           <div class="price-card__price" style="font-size:1.5rem">от 100 млн</div>
           <p class="price-card__note">Сдан</p>
         </a>
-        <a href="lucky-moscow/" class="price-card" style="text-decoration:none;display:block">
+        <a href="lucky-moscow/" class="price-card" style="text-decoration:none;display:block" data-cls="Элит" data-price="80" data-district="Арбат" data-status="Сдан">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Элит · Арбат</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Lucky <span style="font-size:.7rem;background:rgba(201,169,110,.15);color:var(--accent);padding:.2rem .5rem;border-radius:4px;margin-left:.5rem">Обзор</span></h2>
           <div class="price-card__price" style="font-size:1.5rem">от 80 млн</div>
           <p class="price-card__note">Сдан</p>
         </a>
-        <a href="sadovye-kvartaly/" class="price-card" style="text-decoration:none;display:block">
+        <a href="sadovye-kvartaly/" class="price-card" style="text-decoration:none;display:block" data-cls="Элит" data-price="90" data-district="Хамовники" data-status="Сдан">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Элит · Хамовники</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Садовые Кварталы <span style="font-size:.7rem;background:rgba(201,169,110,.15);color:var(--accent);padding:.2rem .5rem;border-radius:4px;margin-left:.5rem">Обзор</span></h2>
           <div class="price-card__price" style="font-size:1.5rem">от 90 млн</div>
           <p class="price-card__note">Сдан</p>
         </a>
-        <a href="city-bay/" class="price-card" style="text-decoration:none;display:block">
+        <a href="city-bay/" class="price-card" style="text-decoration:none;display:block" data-cls="Бизнес" data-price="8" data-district="Покровское-Стрешнево" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Бизнес · Покровское-Стрешнево</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК City Bay <span style="font-size:.7rem;background:rgba(201,169,110,.15);color:var(--accent);padding:.2rem .5rem;border-radius:4px;margin-left:.5rem">Обзор</span></h2>
           <div class="price-card__price" style="font-size:1.5rem">от 8.6 млн</div>
           <p class="price-card__note">Строится (5-я очередь)</p>
         </a>
-        <a href="oko/" class="price-card" style="text-decoration:none;display:block">
+        <a href="oko/" class="price-card" style="text-decoration:none;display:block" data-cls="Premium" data-price="50" data-district="Москва-Сити" data-status="Сдан">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Premium · Москва-Сити</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК ОКО</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 50 млн</div>
           <p class="price-card__note">Сдан</p>
         </a>
-        <a href="federaciya/" class="price-card" style="text-decoration:none;display:block">
+        <a href="federaciya/" class="price-card" style="text-decoration:none;display:block" data-cls="Premium" data-price="45" data-district="Москва-Сити" data-status="Сдан">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Premium · Москва-Сити</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Башня Федерация</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 45 млн</div>
           <p class="price-card__note">Сдан</p>
         </a>
-        <a href="moskva-city-imperia/" class="price-card" style="text-decoration:none;display:block">
+        <a href="moskva-city-imperia/" class="price-card" style="text-decoration:none;display:block" data-cls="Premium" data-price="35" data-district="Москва-Сити" data-status="Сдан">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Premium · Москва-Сити</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Imperia Tower</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 35 млн</div>
           <p class="price-card__note">Сдан</p>
         </a>
-        <a href="bunin/" class="price-card" style="text-decoration:none;display:block">
+        <a href="bunin/" class="price-card" style="text-decoration:none;display:block" data-cls="Элит" data-price="40" data-district="Раменки" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Элит · Раменки</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Бунин</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 40 млн</div>
           <p class="price-card__note">Строится</p>
         </a>
-        <a href="tsvetnoy-bul-var/" class="price-card" style="text-decoration:none;display:block">
+        <a href="tsvetnoy-bul-var/" class="price-card" style="text-decoration:none;display:block" data-cls="Бизнес" data-price="25" data-district="Мещанский" data-status="Сдан">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Бизнес · Мещанский</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Цветной Бульвар 26</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 25 млн</div>
           <p class="price-card__note">Сдан</p>
         </a>
-        <a href="headliner/" class="price-card" style="text-decoration:none;display:block">
+        <a href="headliner/" class="price-card" style="text-decoration:none;display:block" data-cls="Бизнес" data-price="15" data-district="Пресненский" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Бизнес · Пресненский</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Headliner</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 15 млн</div>
           <p class="price-card__note">Строится</p>
         </a>
-        <a href="moss-primavera/" class="price-card" style="text-decoration:none;display:block">
+        <a href="moss-primavera/" class="price-card" style="text-decoration:none;display:block" data-cls="Элит" data-price="50" data-district="Раменки" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Элит · Раменки</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Primavera</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 50 млн</div>
           <p class="price-card__note">Строится</p>
         </a>
-        <a href="serebryaniy-bor-estate/" class="price-card" style="text-decoration:none;display:block">
+        <a href="serebryaniy-bor-estate/" class="price-card" style="text-decoration:none;display:block" data-cls="Элит" data-price="70" data-district="Хорошёво-Мнёвники" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Элит · Хорошёво-Мнёвники</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Серебряный Бор Эстейт</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 70 млн</div>
           <p class="price-card__note">Строится</p>
         </a>
-        <a href="river-park/" class="price-card" style="text-decoration:none;display:block">
+        <a href="river-park/" class="price-card" style="text-decoration:none;display:block" data-cls="Комфорт+" data-price="12" data-district="Нагатино-Садовники" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Комфорт+ · Нагатино-Садовники</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК River Park Коломенское</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 12 млн</div>
           <p class="price-card__note">Строится</p>
         </a>
-        <a href="tatyana/" class="price-card" style="text-decoration:none;display:block">
+        <a href="tatyana/" class="price-card" style="text-decoration:none;display:block" data-cls="Бизнес" data-price="30" data-district="Хамовники" data-status="Сдан">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Бизнес · Хамовники</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Татьяна</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 30 млн</div>
           <p class="price-card__note">Сдан</p>
         </a>
-        <a href="dom-na-bronnoy/" class="price-card" style="text-decoration:none;display:block">
+        <a href="dom-na-bronnoy/" class="price-card" style="text-decoration:none;display:block" data-cls="Элит" data-price="80" data-district="Пресненский" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Элит · Пресненский</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Дом на Бронной</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 80 млн</div>
           <p class="price-card__note">Строится</p>
         </a>
-        <a href="chistye-prudy/" class="price-card" style="text-decoration:none;display:block">
+        <a href="chistye-prudy/" class="price-card" style="text-decoration:none;display:block" data-cls="Бизнес" data-price="20" data-district="Мещанский" data-status="Вторичка">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Бизнес / Премиум · Мещанский</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Чистые Пруды</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 20 млн</div>
           <p class="price-card__note">Вторичный рынок</p>
         </a>
-        <a href="maison-rouge/" class="price-card" style="text-decoration:none;display:block">
+        <a href="maison-rouge/" class="price-card" style="text-decoration:none;display:block" data-cls="Элит" data-price="60" data-district="Хамовники" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Элит · Хамовники</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Maison Rouge</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 60 млн</div>
           <p class="price-card__note">Строится</p>
         </a>
-        <a href="knightsbridge-private-park/" class="price-card" style="text-decoration:none;display:block">
+        <a href="knightsbridge-private-park/" class="price-card" style="text-decoration:none;display:block" data-cls="Элит" data-price="100" data-district="Хамовники" data-status="Сдан">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Элит · Хамовники</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Knightsbridge Private Park</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 100 млн</div>
           <p class="price-card__note">Сдан</p>
         </a>
-        <a href="nagatino-island/" class="price-card" style="text-decoration:none;display:block">
+        <a href="nagatino-island/" class="price-card" style="text-decoration:none;display:block" data-cls="Бизнес" data-price="14" data-district="Нагатинский затон" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Бизнес · Нагатинский затон</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Nagatino i-Land</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 14 млн</div>
           <p class="price-card__note">Строится</p>
         </a>
-        <a href="zilart/" class="price-card" style="text-decoration:none;display:block">
+        <a href="zilart/" class="price-card" style="text-decoration:none;display:block" data-cls="Бизнес" data-price="10" data-district="Даниловский" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Бизнес · Даниловский</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК ЗиЛАРТ</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 10 млн</div>
           <p class="price-card__note">Строится / Частично сдан</p>
         </a>
-        <a href="the-one/" class="price-card" style="text-decoration:none;display:block">
+        <a href="the-one/" class="price-card" style="text-decoration:none;display:block" data-cls="Элит" data-price="150" data-district="Пресненский" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Элит · Пресненский</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК The One</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 150 млн</div>
           <p class="price-card__note">Строится</p>
         </a>
-        <a href="high-life/" class="price-card" style="text-decoration:none;display:block">
+        <a href="high-life/" class="price-card" style="text-decoration:none;display:block" data-cls="Бизнес" data-price="18" data-district="Дорогомилово" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Бизнес · Дорогомилово</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК High Life</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 18 млн</div>
           <p class="price-card__note">Строится</p>
         </a>
-        <a href="prokshino/" class="price-card" style="text-decoration:none;display:block">
+        <a href="prokshino/" class="price-card" style="text-decoration:none;display:block" data-cls="Комфорт+" data-price="5" data-district="Новомосковский АО" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Комфорт+ · Новомосковский АО</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Прокшино</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 5.5 млн</div>
           <p class="price-card__note">Строится</p>
         </a>
-        <a href="basmanny-kvart/" class="price-card" style="text-decoration:none;display:block">
+        <a href="basmanny-kvart/" class="price-card" style="text-decoration:none;display:block" data-cls="Элит" data-price="50" data-district="Басманный" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Элит · Басманный</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Басманный 5</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 50 млн</div>
           <p class="price-card__note">Строится</p>
         </a>
-        <a href="ostrova/" class="price-card" style="text-decoration:none;display:block">
+        <a href="ostrova/" class="price-card" style="text-decoration:none;display:block" data-cls="Комфорт+" data-price="9" data-district="Мневниковская пойма" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Комфорт+ · Мневниковская пойма</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Острова</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 9 млн</div>
           <p class="price-card__note">Строится</p>
         </a>
-        <a href="red7/" class="price-card" style="text-decoration:none;display:block">
+        <a href="red7/" class="price-card" style="text-decoration:none;display:block" data-cls="Бизнес" data-price="20" data-district="Красносельский" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Бизнес · Красносельский</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК RED7</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 20 млн</div>
           <p class="price-card__note">Строится</p>
         </a>
-        <a href="suschevsky/" class="price-card" style="text-decoration:none;display:block">
+        <a href="suschevsky/" class="price-card" style="text-decoration:none;display:block" data-cls="Бизнес" data-price="15" data-district="Марьина Роща" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Бизнес · Марьина Роща</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Сущёвский</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 15 млн</div>
           <p class="price-card__note">Строится</p>
         </a>
-        <a href="amber-city/" class="price-card" style="text-decoration:none;display:block">
+        <a href="amber-city/" class="price-card" style="text-decoration:none;display:block" data-cls="Бизнес" data-price="13" data-district="Войковский" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Бизнес · Войковский</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Amber City</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 13 млн</div>
           <p class="price-card__note">Строится</p>
         </a>
-        <a href="paveletskaya-city/" class="price-card" style="text-decoration:none;display:block">
+        <a href="paveletskaya-city/" class="price-card" style="text-decoration:none;display:block" data-cls="Бизнес" data-price="22" data-district="Замоскворечье" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Бизнес · Замоскворечье</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Павелецкая Сити</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 22 млн</div>
           <p class="price-card__note">Строится</p>
         </a>
-        <a href="symbol/" class="price-card" style="text-decoration:none;display:block">
+        <a href="symbol/" class="price-card" style="text-decoration:none;display:block" data-cls="Комфорт+" data-price="9" data-district="Лефортово" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Комфорт+ · Лефортово</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК Символ</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 9 млн</div>
           <p class="price-card__note">Строится / Частично сдан</p>
         </a>
-        <a href="west-garden/" class="price-card" style="text-decoration:none;display:block">
+        <a href="west-garden/" class="price-card" style="text-decoration:none;display:block" data-cls="Бизнес" data-price="20" data-district="Дорогомилово" data-status="Строится">
           <div style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Бизнес+ · Дорогомилово</div>
           <h2 class="price-card__title" style="font-size:1.1rem">ЖК West Garden</h2>
           <div class="price-card__price" style="font-size:1.5rem">от 20 млн</div>
@@ -316,5 +367,43 @@
     <div class="container footer-copy"><span>&copy; 2026 Zalozhkova Agency</span></div>
   </footer>
 
+
+  <p class="catalog-empty" id="jk-empty" style="display:none;color:var(--muted);font-size:1rem;padding:2rem 0">По выбранным фильтрам ничего не найдено. Попробуйте смягчить условия.</p>
+  <script>
+  (function(){
+    var grid=document.getElementById('jk-grid');
+    if(!grid) return;
+    var cards=[].slice.call(grid.querySelectorAll('.price-card'));
+    var state={cls:'',price:'',status:'',district:''};
+    var countEl=document.getElementById('jk-count');
+    var emptyEl=document.getElementById('jk-empty');
+    function inPrice(v,range){ if(!range) return true; var p=range.split('-'); var lo=+p[0],hi=+p[1]; return v>=lo && v<=hi; }
+    function apply(){
+      var n=0;
+      cards.forEach(function(c){
+        var ok = (!state.cls || c.dataset.cls===state.cls)
+              && (!state.status || c.dataset.status===state.status)
+              && (!state.district || c.dataset.district===state.district)
+              && inPrice(+c.dataset.price, state.price);
+        c.classList.toggle('is-hidden', !ok);
+        if(ok) n++;
+      });
+      countEl.textContent='Показано: '+n+' из '+cards.length;
+      emptyEl.style.display = n? 'none':'block';
+    }
+    document.querySelectorAll('#jk-filters .filter-group[data-filter] .filter-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var grp=btn.closest('.filter-group'); var key=grp.dataset.filter;
+        grp.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('is-active');});
+        btn.classList.add('is-active');
+        state[key]=btn.dataset.val;
+        apply();
+      });
+    });
+    var sel=document.getElementById('jk-district');
+    if(sel) sel.addEventListener('change', function(){ state.district=sel.value; apply(); });
+    apply();
+  })();
+  </script>
 </body>
 </html>

@@ -161,6 +161,58 @@ body > nav {
 }
 body:has(.nav-toggle:checked) { overflow: hidden; }
 
+/* ─── CATALOG FILTERS ─── */
+.catalog-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem 2rem;
+  align-items: center;
+  margin-bottom: 1.75rem;
+}
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+.filter-group__label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-right: 0.35rem;
+}
+.filter-btn {
+  padding: 0.42rem 0.95rem;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.filter-btn:hover { color: var(--text); border-color: var(--accent); }
+.filter-btn.is-active {
+  background: var(--accent);
+  color: #0d0d0d;
+  border-color: var(--accent);
+}
+.filter-select {
+  padding: 0.42rem 0.95rem;
+  border: 1px solid var(--border);
+  background: #0d0d0d;
+  color: var(--text);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+.filter-select:hover { border-color: var(--accent); }
+.catalog-count { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.5rem; }
+.price-card.is-hidden { display: none !important; }
+
 /* ─── BUTTONS ─────────────────────────── */
 .btn {
   display: inline-block;
