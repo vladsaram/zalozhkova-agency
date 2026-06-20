@@ -170,3 +170,15 @@ document.querySelectorAll('.yt-lite').forEach(btn => {
     btn.appendChild(iframe);
   });
 });
+
+
+/* ============================================================
+   MOBILE MENU — закрыть при клике по ссылке (для якорей на главной)
+   ============================================================ */
+(function(){
+  const toggle = document.getElementById('nav-toggle');
+  if (!toggle) return;
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => { toggle.checked = false; });
+  });
+})();

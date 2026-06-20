@@ -108,7 +108,58 @@ body > nav {
   white-space: nowrap;
 }
 .nav-cta:hover { opacity: 0.85; }
-@media (max-width: 680px) { .nav-links { display: none; } }
+
+/* ─── MOBILE MENU (CSS-only burger, no JS) ─── */
+.nav-toggle { display: none; }
+.nav-burger { display: none; }
+@media (max-width: 680px) {
+  .nav-burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    order: 3;
+    margin-left: 0.9rem;
+    z-index: 1002;
+  }
+  .nav-burger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.2s ease;
+  }
+  .nav-cta { order: 2; margin-left: auto; }
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.25rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: rgba(13, 13, 13, 0.98);
+    backdrop-filter: blur(10px);
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+  }
+  .nav-links a { font-size: 1.3rem; color: var(--text); }
+  .nav-toggle:checked ~ .nav-links { transform: translateX(0); }
+  .nav-toggle:checked ~ .nav-burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle:checked ~ .nav-burger span:nth-child(2) { opacity: 0; }
+  .nav-toggle:checked ~ .nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+body:has(.nav-toggle:checked) { overflow: hidden; }
 
 /* ─── BUTTONS ─────────────────────────── */
 .btn {
