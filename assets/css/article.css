@@ -69,6 +69,8 @@
   background: var(--dark3);
   border: 1px solid var(--border);
   flex-shrink: 0;
+  object-fit: cover;
+  object-position: center 30%;
 }
 
 .article__avatar--lg { width: 56px; height: 56px; }
