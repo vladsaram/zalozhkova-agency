@@ -471,6 +471,67 @@ body > nav {
 .about-photo-frame img { width: 100%; height: 100%; object-fit: cover; }
 .about-photo-placeholder { text-align: center; color: var(--muted); }
 .about-photo-placeholder svg { margin-bottom: 0.75rem; opacity: 0.3; }
+
+/* About video — lite YouTube facade (iframe loads on click) */
+.about-video { margin-top: clamp(2.5rem, 6vw, 4.5rem); text-align: center; }
+.about-video__title {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  margin: 0.5rem 0 1.5rem;
+  font-weight: 600;
+}
+.yt-lite {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  aspect-ratio: 16/9;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  padding: 0;
+  cursor: pointer;
+  background-color: var(--dark3);
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.yt-lite::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(13,13,13,0) 55%, rgba(13,13,13,0.45) 100%);
+}
+.yt-lite:hover, .yt-lite:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+.yt-lite__play {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 78px; height: 78px;
+  border-radius: 50%;
+  background: var(--accent);
+  z-index: 1;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.yt-lite__play::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 53%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: 13px 0 13px 22px;
+  border-color: transparent transparent transparent var(--dark);
+}
+.yt-lite:hover .yt-lite__play { transform: translate(-50%, -50%) scale(1.08); }
+.yt-lite iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  border: 0;
+}
 .about-photo-placeholder p { font-size: 0.85rem; letter-spacing: 0.05em; }
 .about-text .section-h2 { margin-bottom: 1.75rem; }
 .about-text p {

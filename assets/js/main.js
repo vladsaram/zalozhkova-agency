@@ -151,3 +151,22 @@ const counterObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 
 counterEls.forEach(el => counterObserver.observe(el));
+
+
+/* ============================================================
+   LITE YOUTUBE — грузим тяжёлый iframe только по клику (CWV)
+   ============================================================ */
+document.querySelectorAll('.yt-lite').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const id = btn.dataset.id;
+    if (!id || btn.querySelector('iframe')) return;
+    const iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + id +
+                 '?autoplay=1&rel=0&modestbranding=1';
+    iframe.title = 'Заложкова Юлия — брокер по недвижимости';
+    iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    btn.innerHTML = '';
+    btn.appendChild(iframe);
+  });
+});
